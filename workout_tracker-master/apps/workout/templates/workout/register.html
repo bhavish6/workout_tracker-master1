@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FitnessTracker</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Load Access to Django Static Files -->
+    {% load static %}
+    <!-- Fav Icon -->
+    <!--[if IE]><link rel="shortcut icon" href="{% static 'workout/images/fav.png' }"><![endif]-->
+    <link rel="icon" href="{% static 'workout/images/fav.png' %}">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{% static 'workout/css/bootstrap.min.css' %}">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="{% static 'workout/css/font-awesome.min.css' %}">
+    <!-- Custom Font Icons CSS-->
+    <link rel="stylesheet" href="{% static 'workout/css/font.css' %}">
+    <!-- Google fonts - Muli-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{% static 'workout/css/style.red.css' %}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{% static 'workout/css/custom.css' %}">
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+          <div class="row">
+            <!-- Logo & Information Panel-->
+            <div class="col-lg-6">
+              <div class="info d-flex align-items-center">
+                <div class="content">
+                  <div class="logo">
+                    <h1 class="display-3">FitnessTracker</h1>
+                  </div>
+                  <p>Track your workouts better.</p>
+                </div>
+              </div>
+            </div>
+            <!-- Form Panel    -->
+            <div class="col-lg-6 bg-white">
+              <div class="form d-flex align-items-center">
+                <div class="content">
+                  <!-- <h1 class="color-white mb-4">FitnessTracker</h1> -->
+                  <form id="register-form" action="/user/register" method="POST">
+                    {% csrf_token %}
+                    <!-- Registration Errors -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == "registration error" %}
+                            <div class="alert alert-danger alert-dismissable" role="alert">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Error!</strong> {{ message }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <!-- Username -->
+                    <div class="form-group">
+                      <input id="username" type="text" name="username" required class="input-material form-control-lg less-dark" placeholder="Username">
+                    </div>
+                    <!-- Email Address -->
+                    <div class="form-group">
+                      <input id="email" type="email" name="email" required class="input-material form-control-lg less-dark" placeholder="Email Address">
+                    </div>
+                    <!-- Password -->
+                    <div class="form-group">
+                      <input id="password" type="password" name="password" required class="input-material form-control-lg less-dark" placeholder="Password">
+                    </div>
+                    <!-- Password Confirm -->
+                    <div class="form-group">
+                      <input id="password_confirmation" type="password" name="password_confirmation" required class="input-material form-control-lg less-dark" placeholder="Confirm Password">
+                    </div>
+                    <!-- TOS Policy -->
+                    <div class="form-group terms-conditions">
+                      <input id="license" type="checkbox" class="checkbox-template" required name="tos_accept">
+                      <label for="license" class="no-margin-bottom">Agree the <a href="/legal/tos" target="_blank">terms of service</a></label>
+                    </div>
+                    <!-- Register Button -->
+                    <input id="register" type="submit" value="Register" class="btn btn-primary btn-lg">
+                  </form><small>Already have an account? </small><a href="/" class="signup">Login</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Javascript files-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"> </script>
+    <script src="{% static 'workout/javascript/bootstrap.min.js' %}"></script>
+    <script src="{% static 'workout/javascript/jquery.cookie.js' %}"> </script>
+    <!-- <script src="{% static 'workout/javascript/Chart.min.js' %}"></script> -->
+    <script src="{% static 'workout/javascript/front.js' %}"></script>
+  </body>
+</html>
